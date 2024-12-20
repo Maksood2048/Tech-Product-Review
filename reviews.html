@@ -1,0 +1,86 @@
+<!DOCTYPE html> 
+<html lang="en"> 
+<head>
+    <meta charset="UTF-8"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <title>Reviews</title> 
+    <style>
+        
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+        }
+        header, nav, footer {
+            text-align: center;
+            background: #333;
+            color: white;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+        }
+        nav a:hover {
+            color: #ddd;
+        }
+        .container {
+            max-width: 800px;
+            margin: 2rem auto;
+            background: white;
+            padding: 1rem;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+        .review {
+            margin: 1rem 0;
+            padding: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background: #f9f9f9;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Tech Product Reviews</h1> 
+    </header>
+    <nav>
+        
+        <a href="index.html">Home</a>
+        <a href="submit-review.html">Submit Review</a>
+        <a href="reviews.html">Reviews</a>
+        <a href="about.html">About</a>
+    </nav>
+    <div class="container">
+        <h2>Reviews</h2>
+        <div id="reviewsContainer"></div> 
+    </div>
+    <footer>
+        &copy; 2024 Tech Review Site 
+    </footer>
+    <script>
+        const reviewsContainer = document.getElementById('reviewsContainer');
+
+        
+        const reviews = JSON.parse(localStorage.getItem('reviews')) || [];
+
+        
+        if (reviews.length > 0) {
+            reviews.forEach(review => {
+                const reviewDiv = document.createElement('div'); 
+                reviewDiv.classList.add('review'); 
+                reviewDiv.innerHTML = `
+                    <h3>${review.productName}</h3> <!-- Product name. -->
+                    <p>${review.reviewText}</p> <!-- Review text. -->
+                    <p><strong>- ${review.reviewerName}</strong></p> <!-- Reviewer name. -->
+                `;
+                reviewsContainer.appendChild(reviewDiv); 
+            });
+        } else {
+            reviewsContainer.innerHTML = '<p>No reviews yet. Be the first to submit one!</p>'; 
+        }
+    </script>
+</body>
+</html>
